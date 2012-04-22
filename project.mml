@@ -1,0 +1,172 @@
+{
+  "bounds": [
+    -180,
+    -85.0511,
+    180,
+    85.0511
+  ],
+  "center": [
+    -75.6872,
+    45.424,
+    15
+  ],
+  "format": "png",
+  "interactivity": false,
+  "minzoom": 6,
+  "maxzoom": 22,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_line where waterway is not null ) as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon",
+        "id": "water",
+        "project": "pgcon",
+        "srs": null
+      },
+      "id": "water",
+      "class": "water",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "water",
+      "geometry": "linestring"
+    },
+    {
+      "geometry": "polygon",
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_polygon where building='yes') as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon",
+        "id": "buildings",
+        "project": "pgcon",
+        "srs": null
+      },
+      "id": "buildings",
+      "class": "buildings-class",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "buildings"
+    },
+    {
+      "geometry": "linestring",
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_line where highway is not null and highway not in ('primary','motorway','motorway_link','primary_link','footway','steps','path')) as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon"
+      },
+      "id": "roads-minor",
+      "class": "roads",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "roads-minor"
+    },
+    {
+      "geometry": "linestring",
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_line where highway in ('primary','motorway','motorway_link','primary_link') )as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon"
+      },
+      "id": "roads-major",
+      "class": "roads",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "roads-major"
+    },
+    {
+      "geometry": "polygon",
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_polygon where building='yes') as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon",
+        "id": "building-names",
+        "project": "pgcon",
+        "srs": null
+      },
+      "id": "buildingnames",
+      "class": "buildingnames",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "buildingnames"
+    },
+    {
+      "geometry": "linestring",
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM planet_osm_line where highway in ('path','steps','footway') ) as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon"
+      },
+      "id": "roads-path",
+      "class": "roads-path",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "roads-path"
+    },
+    {
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT osm_id,way,name,amenity FROM planet_osm_point where amenity in ('bar','cafe','restaraunt','fast_food') union select osm_id, ST_Centroid(way) as way, name,amenity FROM planet_osm_polygon where amenity in ('bar','cafe','restaraunt','fast_food') ) as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon",
+        "id": "food",
+        "project": "pgcon",
+        "srs": null
+      },
+      "id": "food",
+      "class": "food",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "food"
+    },
+    {
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select osm_id,way,name ,tourism from planet_osm_point where tourism is not null union select osm_id,st_centroid(way) as way ,name,tourism from planet_osm_polygon where tourism is not null) as data",
+        "extent": "",
+        "key_field": "osm_id",
+        "geometry_field": "way",
+        "host": "localhost",
+        "dbname": "pgcon"
+      },
+      "id": "hotel",
+      "class": "hotel",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "name": "hotel"
+    }
+  ],
+  "name": "pgcon",
+  "description": "Example for PGCON",
+  "attribution": ""
+}
