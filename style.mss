@@ -1,6 +1,6 @@
 Map {
   background-color: #ffffff;
-}
+} 
 
 
 
@@ -15,7 +15,7 @@ Map {
   line-width:1;
   polygon-opacity:1;
   polygon-fill:#DCEDEA;
-  [name='Desmarais Building'],[name='Royal Oak'] {
+  [name='Morisset Hall'],[name='Royal Oak'] {
        polygon-fill:#AA44FF;
       
    }
@@ -75,7 +75,7 @@ Map {
 }
 
 #buildingnames {
-  [name='Desmarais Building'],[name='Royal Oak'] {
+  [name='Morisset Hall'],[name='Royal Oak'] {
      text-name: '[name]';
      text-face-name: 'DejaVu Sans Mono Bold';
      text-size: 12;
@@ -110,7 +110,7 @@ Map {
 
 .hotel {
     [zoom >= 16 ] {
-      [tourism='motel'],[tourism='hotel'] {
+      [tourism='motel'],[tourism='hotel'],[building='dormitory'] {
         point-file: url('img/accommodation_hotel2.n.16.png');
         point-allow-overlap: true;
       }
